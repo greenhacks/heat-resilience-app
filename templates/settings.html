@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Heat Resilience App{% endblock %}
+
+{% block body %}  
+
+  <!-- Update for accessibility -->
+  <h2>Settings:</h2>
+    <div id="settings">
+
+      <li>First Name: {{fname}}</li>
+      <li>Last Name: {{lname}}</li>
+      <li>Email: {{email}}</li>
+      <li>City: {{city}}</li>
+      <li>Country: {{country_code}}</li>
+      <li>Phone: {{phone}}</li>
+      <li>Age: {{age}}</li>
+      <li>Ideal Air Temperature: {{ideal_temp}}</li>
+      <li>Opted in for Heat Alerts: {{opted_in}}</li>
+
+    </div>
+
+    <div>
+      Click <a href="/user-settings-update"> here</a> to update your settings. 
+    </div>
+    
+    <div>
+     <a href="/dashboard"> Return to dashboard</a>
+    </div>
+
+{% endblock %}

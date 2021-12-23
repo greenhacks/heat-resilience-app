@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Heat Resilience App{% endblock %}
+
+{% block head %}
+<!-- React -->
+<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+
+<!-- Recharts (React library for charts) -->
+<script src="https://unpkg.com/prop-types/prop-types.min.js"></script>
+<script src="https://unpkg.com/recharts/umd/Recharts.js"></script>
+
+{% endblock %}
+
+
+{% block body %}
+<!-- React component begins -->
+  <div 
+    id="root">
+  </div>
+  <script type="text/jsx" src="/static/chart.jsx"></script>
+
+<h1>Dashboard</h1>
+
+  <div>
+    <h2>Hi, {{fname}}!</h2>
+  </div>
+  <h3>Track your alerts over time:</h3>
+
+  <div>You have received a total of {{alerts}} alerts.</div>
+
+  <!-- Chart goes here -->
+  <p> 
+   <a href="/user-settings">Settings</a>.
+  </p>
+
+  <p> 
+    <a href="/logout">Log out</a>.
+   </p>
+{% endblock %}
