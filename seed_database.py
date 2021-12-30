@@ -71,11 +71,26 @@ threshold_3 = crud.create_alert("Caution 3", "105.9-129.2")
 
 threshold_4 = crud.create_alert("Caution 4", "129.3+")
 
-# create 10 individual alerts for test user
-date_str = "22-Dec-2021"
+# create test individual alerts for test user
 format = "%d-%b-%Y"
-date = datetime.strptime(date_str, format)
 
-for n in range(11):
+for _ in range(5):
+    date_str1 = "22-Dec-2021"
+    date1 = datetime.strptime(date_str1, format)
     alert_type_id = 1
-    db_test_alerts = crud.create_individual_alert(1, alert_type_id, date)
+    db_test_alerts = crud.create_individual_alert(1, alert_type_id, date1)
+
+    date_str2 = "11-Jul-2021"
+    date2 = datetime.strptime(date_str2, format)
+    alert_type_id = 2
+    db_test_alerts = crud.create_individual_alert(1, alert_type_id, date2)
+
+    date_str3 = "01-Jan-2021"
+    date3 = datetime.strptime(date_str3, format)
+    alert_type_id = 3
+    db_test_alerts = crud.create_individual_alert(1, alert_type_id, date3)
+
+    date_str4 = "11-Aug-2021"
+    date4 = datetime.strptime(date_str4, format)
+    alert_type_id = 4
+    db_test_alerts = crud.create_individual_alert(1, alert_type_id, date4)

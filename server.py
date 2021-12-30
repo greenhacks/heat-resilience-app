@@ -4,6 +4,7 @@ import model
 import os
 import requests
 import alert
+import datetime
 from twilio.rest import Client
 
 from flask import (Flask, render_template, request, flash, session,
@@ -33,15 +34,30 @@ def show_dashboard():
     alerts = crud.get_total_alerts(user.email)
     return render_template('dashboard.html', alerts=alerts, fname=fname)
 
-@app.route('/alerts.json')
+@app.route('/total-alerts')
 def get_total_alerts():
-    """Get total alerts (count)."""
+    """Get total alerts (count) for each user."""
 
     user = crud.get_user_by_email(session['user_email'])
 
-    alerts = crud.get_total_alerts(user.email)
+    total_alerts = crud.get_total_alerts(user.email)
 
-    return alerts
+    return total_alerts
+
+@app.route('/monthly-alerts.json')
+def get_monthly_alerts():
+    """Get alerts by month for current year."""
+
+    user = crud.get_user_by_email(session['user_email'])
+
+    date = datetime.date.today()
+
+    year=date.year
+    
+    monthly_alerts = crud.get_monthly_alerts(user.email, year)
+
+    return monthly_alerts
+
 
 @app.route('/users', methods=['POST'])
 def create_account():

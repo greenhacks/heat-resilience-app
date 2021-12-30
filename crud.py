@@ -1,10 +1,12 @@
 """CRUD operations."""
 
 from model import db, User, AlertType, IndividualAlerts
+from time import strftime
 import server
 import requests
+import datetime
 import twilio
-from flask import (session, request)
+# from flask import (session, request)
 
 
 def create_alert(alert_text, temp_range):
@@ -50,7 +52,7 @@ def update_settings(user, new_settings_dict):
 
     # for every key and values in the dictionary
     for key, value in new_settings_dict.items():
-        if value == "None":
+        if value == "None" or value == "":
             pass
         elif value != "" or value != "None": # if the value is not an empty string or None
             setattr(user, key, value) #as long as the key in the dict matches the attribute
@@ -85,6 +87,46 @@ def get_total_alerts(email):
 
     else:
         return total_alerts
+
+def get_monthly_alerts(email, year):
+    """Gets monthly number of alerts for the current year a user has received."""
+
+    user = get_user_by_email(email)
+
+    x = datetime.datetime.now()
+
+    month = x.strftime("%B")
+
+    new_dict = {}
+
+    monthly_alerts = IndividualAlerts.query.options(db.joinedload('user')).all() #joined tables - returns a list
+    
+    for alert in monthly_alerts:    # [<Alert>, <Alert>]
+        # get the year the alert was sent
+        interim = alert.date_sent
+        year = interim.strftime("%Y")
+        
+        # get the months for each alert
+        month = interim.strftime("%B")
+        
+        new_dict['year'] = year
+
+        new_dict[month] = IndividualAlerts.query.options(db.joinedload('user')).count()
+
+
+    print(new_dict)
+
+
+
+    # if monthly_alerts == None:
+    #     return 0
+
+    # else:
+    #     # loop through alerts to get alerts by month
+    #     for alert in monthly_alerts:
+    #         alerts_dict[]
+            
+
 
 # Helps execute code
 if __name__ == "__main__":
