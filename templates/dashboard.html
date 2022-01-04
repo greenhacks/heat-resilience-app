@@ -7,6 +7,8 @@
 <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
 <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
 
+<!-- {# ChartJS #} -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
 
 {% endblock %}
 
@@ -25,14 +27,27 @@
   </div>
   <h3>Track your alerts over time:</h3>
 
+  <!-- Chart.js -->
+  <div> 
+    <canvas id="line-chart"></canvas>
+  </div>
+
+  <script src="static/chart.js"></script>
+
   <div>You have received a total of {{alerts}} alerts.</div>
 
-  <!-- Chart goes here -->
   <p> 
-   <a href="/user-settings">Settings</a>.
+    <a href="/about">About</a>
+   </p>
+
+   <p> 
+    <a href="/resilience-resources">Resilience Resources</a>
+   </p>
+  <p> 
+   <a href="/user-settings">Settings</a>
   </p>
 
   <p> 
-    <a href="/logout">Log out</a>.
+    <a href="/logout">Log out</a>
    </p>
 {% endblock %}

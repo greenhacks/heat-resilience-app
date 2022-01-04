@@ -88,33 +88,48 @@ def get_total_alerts(email):
     else:
         return total_alerts
 
-def get_monthly_alerts(email, year):
+def get_monthly_alerts(email):
     """Gets monthly number of alerts for the current year a user has received."""
 
     user = get_user_by_email(email)
 
-    x = datetime.datetime.now()
-
-    month = x.strftime("%B")
-
     new_dict = {}
+    new_list_of_tuples = []
+    # months = ['1 - January', '2 - February', '3 - March', '4 - April', '5 - May',
+    #                 '6 - June', '7 - July', '8 - August', '9 - September', '10 - October', 
+    #                 '11 - November', '12 - December']
+    # months = ['January', 'February', 'March', 'April', 'May',
+    #                 'June', 'July', 'August', 'September', 'October', 
+    #                 'November', 'December']
+    months_num = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
-    monthly_alerts = IndividualAlerts.query.options(db.joinedload('user')).all() #joined tables - returns a list
-    
+    monthly_alerts = IndividualAlerts.query.filter_by(user=user).all() #returns a list
+
     for alert in monthly_alerts:    # [<Alert>, <Alert>]
         # get the year the alert was sent
         interim = alert.date_sent
-        year = interim.strftime("%Y")
+        # year = interim.strftime("%Y")
         
         # get the months for each alert
-        month = interim.strftime("%B")
-        
-        new_dict['year'] = year
+        month = int(interim.strftime("%m"))
 
-        new_dict[month] = IndividualAlerts.query.options(db.joinedload('user')).count()
+        # new_dict['year'] = year
 
+        new_dict[month] = new_dict.get(month, 0) + 1
 
-    print(new_dict)
+    for month in months_num:
+        if month not in new_dict:
+            new_dict[month] = 0
+
+    # make a list of tuples for Flask route
+    # for key in list(new_dict):
+    #     value = new_dict.pop(key)
+    #     new_tup = (key, value)
+    #     new_list_of_tuples.append(new_tup)
+
+    # print(new_list_of_tuples)
+    return list(new_dict.items())
+    # return new_dict
 
 
 

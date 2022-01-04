@@ -54,10 +54,20 @@ def get_monthly_alerts():
 
     year=date.year
     
-    monthly_alerts = crud.get_monthly_alerts(user.email, year)
+    monthly_alerts = crud.get_monthly_alerts(user.email) #returns list
 
-    return monthly_alerts
+    alerts_this_month = []
+    for date, total in monthly_alerts:
+        alerts_this_month.append({'month': date,
+                                'alerts': total})
 
+    return jsonify({'data': alerts_this_month})
+
+    # new_list_of_tuples = []
+
+    # for item in monthly_alerts.items: #for each key/value pair in the dict
+
+    #return jsonify(monthly_alerts) #goes to AJAX fetch call in chart.js file
 
 @app.route('/users', methods=['POST'])
 def create_account():
@@ -173,14 +183,19 @@ def update_user_settings():
     
 #     return redirect("/")
 
-# route for a user to see their alerts on the dashboard
-# @app.route('/dashboard')
+# route for static resilience page - accessed through Dashboard
+@app.route('/resilience-resources')
+def show_resilience():
+    """Show the resilience resources page"""
 
-# # route for static resilience page - can be accessed through homepage?
-# @app.route('/resilience')
+    return render_template('resources.html')
 
-# # route for static about page - can be accessed through homepage?
-# @app.route('/about')
+# route for static about page - accessed through Dashboard
+@app.route('/about')
+def show_about():
+    """Show the About page"""
+
+    return render_template('about.html')
 
 
 # Helps execute code

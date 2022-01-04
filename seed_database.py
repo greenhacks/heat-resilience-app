@@ -74,8 +74,8 @@ threshold_4 = crud.create_alert("Caution 4", "129.3+")
 # create test individual alerts for test user
 format = "%d-%b-%Y"
 
-for _ in range(5):
-    date_str1 = "22-Dec-2021"
+for _ in range(12):
+    date_str1 = "12-Jan-2021"
     date1 = datetime.strptime(date_str1, format)
     alert_type_id = 1
     db_test_alerts = crud.create_individual_alert(1, alert_type_id, date1)
