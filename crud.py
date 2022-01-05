@@ -50,11 +50,11 @@ def get_user_by_email(email):
 def update_settings(user, new_settings_dict):
     """Update a user's settings per user input."""
 
-    # for every key and values in the dictionary
+    # for every key and value in the dictionary
     for key, value in new_settings_dict.items():
-        if value == "None" or value == "":
+        if value == "None" or value == "" or value == None:
             pass
-        elif value != "" or value != "None": # if the value is not an empty string or None
+        elif value != "" or value != "None" or value != None: # if the value is not an empty string or None
             setattr(user, key, value) #as long as the key in the dict matches the attribute
                 # in the model, the attribute will be updated to the value
 
@@ -94,7 +94,7 @@ def get_monthly_alerts(email):
     user = get_user_by_email(email)
 
     new_dict = {}
-    new_list_of_tuples = []
+
     # months = ['1 - January', '2 - February', '3 - March', '4 - April', '5 - May',
     #                 '6 - June', '7 - July', '8 - August', '9 - September', '10 - October', 
     #                 '11 - November', '12 - December']
@@ -121,26 +121,11 @@ def get_monthly_alerts(email):
         if month not in new_dict:
             new_dict[month] = 0
 
-    # make a list of tuples for Flask route
-    # for key in list(new_dict):
-    #     value = new_dict.pop(key)
-    #     new_tup = (key, value)
-    #     new_list_of_tuples.append(new_tup)
-
-    # print(new_list_of_tuples)
+    # returns a list of tuples
     return list(new_dict.items())
-    # return new_dict
 
 
 
-    # if monthly_alerts == None:
-    #     return 0
-
-    # else:
-    #     # loop through alerts to get alerts by month
-    #     for alert in monthly_alerts:
-    #         alerts_dict[]
-            
 
 
 # Helps execute code
