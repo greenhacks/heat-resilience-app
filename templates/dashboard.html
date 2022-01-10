@@ -20,7 +20,7 @@
   </div>
   <script type="text/jsx" src="/static/chart.jsx"></script>
 
-<h1>Dashboard</h1>
+<h1><label>Dashboard</label></h1>
 
   <div>
     <h2>Hi, {{fname}}!</h2>
@@ -31,8 +31,10 @@
   <div> 
     <canvas id="line-chart"></canvas>
   </div>
-
+  
+  {% if alerts != 0 %}
   <script src="static/chart.js"></script>
+  {% endif %}
 
   <div>You have received a total of {{alerts}} alerts.</div>
 

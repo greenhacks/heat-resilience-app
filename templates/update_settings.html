@@ -7,43 +7,56 @@
   <h2>Update your user settings here:</h2>
   <form action="/user-settings-update" method="POST">
     <p>
-      First Name <input type="text" name="fname" value="{{user.fname}}">
+      <label>First Name: </label> 
+      <input type="text" name="fname" value="{{user.fname}}">
     </p>
     <p>
-      Last Name <input type="text" name="lname" value="{{user.lname}}">
+      <label>Last Name: </label>
+      <input type="text" name="lname" value="{{user.lname}}">
     </p>
     <p>
-      City <input type="text" name="city" value="{{user.city}}">
+      <label>City: </label>
+      <input type="text" name="city" value="{{user.city}}">
     </p>
     <p>
-      Country <input type="text" name="country" value="{{user.country_code}}">
+      <label>Country Code: </label> 
+      <input type="text" name="country" value="{{user.country_code}}">
+    </p>
+
+    <p>
+      <label>Phone: </label>
+      <input type="text" name="phone" value="{{user.phone}}" pattern=
+                  "^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$">
     </p>
     <p>
-      Phone <input type="text" name="phone" value="{{user.phone}}">
+      <label>Age (years) : </label>
+      <input type="number" name="age" placeholder="e.g. 45" value="{{user.age}}">
     </p>
     <p>
-      Age <input type="text" name="age" value="{{user.age}}">
-    </p>
-    <p>
-      Ideal Air Temperature <input type="text" name="idealtemp" value="{{user.ideal_temp_f}}">
+      <label>Ideal Air Temperature (F): </label> <input type="number" name="idealtemp" 
+            placeholder="e.g. 73" value="{{user.ideal_temp_f}}">
     </p>
     <p>
       <label>Opt in for heat alerts: </label> 
-      {% if user.opted_in == True %}
+      {% if user.opted_in == None or user.opted_in == "No" %}
+                
+        <input type="checkbox" name="optin" value="Yes">
 
-        <input type="checkbox" name="optin" checked="True" value="{{user.opted_in}}">
+      {% else %}
 
-        {% else %}
-        <input type="checkbox" name="optin" checked="False" value="{{user.opted_in}}">
+        <input type="checkbox" name="optin" checked="True">
 
       {% endif %}
+
     </p>
     
     <p>
-      Email <input type="text" name="email" value="{{user.email}}">
+      <label>Email: </label>
+      <input type="text" name="email" value="{{user.email}}">
     </p>
     <p>
-      Password <input type="password" name="password">
+      <label>Password: </label>
+      <input type="password" name="password">
     </p>
     <p>
       <input type="submit">
