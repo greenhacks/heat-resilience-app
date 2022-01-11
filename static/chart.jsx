@@ -3,9 +3,6 @@ function ClickCounter(props) {
   return (
     <div>
       <div>{currentCount}</div>
-      {/* <button type="button" onClick={() => setCurrentCount(currentCount + 1)}>
-        Click me to increase the count
-      </button> */}
       <ClickComponent buttonClick={() => setCurrentCount(currentCount + 1)} />
     </div>
   );
@@ -18,14 +15,5 @@ function ClickComponent({buttonClick}) {
       </button>
   );
 }
-// //useEffect - React hook (React 2 lecture notes)
-// useEffect(() => {
-//   // GET request using fetch inside useEffect React hook
-//   fetch('alerts.json')
-//       .then(response => response.json())
-//       .then(data => setTotalReactPackages(data.total));
 
-// // empty dependency array means this effect will only run once (like componentDidMount in classes)
-// }, []);
-
-ReactDOM.render(<ClickCounter />, document.querySelector('#root'));
+ReactDOM.render(<ClickCounter initialCount={0}/>, document.querySelector('#root'));

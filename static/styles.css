@@ -1,0 +1,62 @@
+#homepage {
+    background-image: url('/static/clouds_lg.jpg');
+    background-color: #c9b575;
+    background-repeat: no-repeat; 
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    color: #FFFFFF
+    /* color: #050517 */
+    
+  }
+
+/* body .container-fluid {
+    /* background-image: url('/static/icecream_lg.jpg'); */
+    /* background-color: #EFC88B;
+    background-repeat: no-repeat; 
+    background-attachment: fixed;
+    background-size: cover;
+    color: #050517 */
+/* }
+
+/* #icecream-img {
+    border: solid 1px black;
+    max-width:100%;
+    height:auto;
+} */
+
+#line-chart {
+    position: relative;
+    height:40vh; width:80vw
+}
+
+a:link {
+    color: green;
+    background-color: transparent;
+    text-decoration: none;
+  }
+  
+  a:visited {
+    color: pink;
+    background-color: transparent;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: red;
+    background-color: transparent;
+    text-decoration: underline;
+  }
+  
+  a:active {
+    color: yellow;
+    background-color: transparent;
+    text-decoration: underline;
+  }
+
+.show {
+    transition: opacity 400ms;
+}
+.hide {
+    opacity: 0;
+}

@@ -6,7 +6,6 @@ import server
 import requests
 import datetime
 import twilio
-# from flask import (session, request)
 
 
 def create_alert(alert_text, temp_range):
@@ -31,21 +30,33 @@ def create_individual_alert(user_id, alert_type_id, date_sent):
 def create_user(fname, city, country_code, phone, email, password, opted_in):
     """Create and return a new user."""
 
+    # Standardize input
+    fname = str(fname).title()
+    city = str(city).title()
+    email = str(email).lower()
+    password = str(password)
+
+    # instantiate user
     user = User(fname=fname, city=city, country_code=country_code, phone=phone, email=email, 
                 password=password, opted_in=opted_in)
 
     db.session.add(user)
-    db.session.commit() #persists data
+    db.session.commit()
 
     return user
 
 def get_user_by_email(email):
     """Get a user by email."""
-    
-    # query the User table in the database w/ SQLAlchemy to get the first email
-    user = User.query.filter(User.email == email).one() #needs to be .one because we want a unique user
-   
-    return user # user will be either the user or None
+
+    try:
+        user = User.query.filter(User.email == email).one() #needs to be .one because we want a unique user
+        return user # user will be either the user or None
+
+    except Exception as e:
+        print(e)
+        print('\n'*10)
+        return None
+
     
 def update_settings(user, new_settings_dict):
     """Update a user's settings per user input."""
@@ -54,7 +65,7 @@ def update_settings(user, new_settings_dict):
     for key, value in new_settings_dict.items():
         if value == "None" or value == "" or value == None:
             pass
-        elif value != "" or value != "None" or value != None: # if the value is not an empty string or None
+        else: # if the value is not an empty string or None
             setattr(user, key, value) #as long as the key in the dict matches the attribute
                 # in the model, the attribute will be updated to the value
 
@@ -95,12 +106,6 @@ def get_monthly_alerts(email):
 
     new_dict = {}
 
-    # months = ['1 - January', '2 - February', '3 - March', '4 - April', '5 - May',
-    #                 '6 - June', '7 - July', '8 - August', '9 - September', '10 - October', 
-    #                 '11 - November', '12 - December']
-    # months = ['January', 'February', 'March', 'April', 'May',
-    #                 'June', 'July', 'August', 'September', 'October', 
-    #                 'November', 'December']
     months_num = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
     monthly_alerts = IndividualAlerts.query.filter_by(user=user).all() #returns a list
@@ -123,9 +128,6 @@ def get_monthly_alerts(email):
 
     # returns a list of tuples
     return list(new_dict.items())
-
-
-
 
 
 # Helps execute code

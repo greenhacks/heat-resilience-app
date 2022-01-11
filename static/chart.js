@@ -10,7 +10,7 @@ fetch('/monthly-alerts.json')
         ));
     console.log(responseJson)
 
-    //Line chart
+    //Line chart using Chart.js
     const lineChart = new Chart(document.querySelector('#line-chart'),
         {
         type: 'line',

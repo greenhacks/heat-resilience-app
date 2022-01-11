@@ -1,5 +1,6 @@
 """Server for the app."""
 import crud
+import re
 import model
 import os
 import requests
@@ -10,7 +11,7 @@ from twilio.rest import Client
 from flask import (Flask, render_template, request, flash, session,
                    redirect, json, jsonify)
 from model import connect_to_db, User, AlertType, IndividualAlerts, db
-from jinja2 import StrictUndefined #Add comments
+from jinja2 import StrictUndefined 
 
 secretkey = os.environ['SECRET_KEY']
 
@@ -63,12 +64,6 @@ def get_monthly_alerts():
 
     return jsonify({'data': alerts_this_month})
 
-    # new_list_of_tuples = []
-
-    # for item in monthly_alerts.items: #for each key/value pair in the dict
-
-    #return jsonify(monthly_alerts) #goes to AJAX fetch call in chart.js file
-
 @app.route('/users', methods=['POST'])
 def create_account():
     """Create user account."""
@@ -81,6 +76,14 @@ def create_account():
     password = request.form.get('password')
     opted_in = request.form.get('optin')
 
+    # convert phone number for Twilio
+    if re.search("^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$", phone):
+        pass
+
+    else:
+        flash('Please input a valid phone number.')
+        return False
+
     # get the user
     user = crud.get_user_by_email(email)
 
@@ -92,34 +95,34 @@ def create_account():
         flash('That email is already in use! Please try again.')
     
     return redirect("/") 
-
+    
 # route that handles login
 @app.route('/login', methods=['POST'])
 def handle_login():
     """Log user into application."""
 
-    email = request.form.get('loginemail') # gets email from form
-    password = request.form.get('loginpassword') # gets password from form
+    email = request.form.get('loginemail') 
+    password = request.form.get('loginpassword')
 
     # get user by email
     user = crud.get_user_by_email(email)
-    # userpassword = crud.get_user_by_password(password) --> COMMENTED OUT: causes security issues
 
-    if password == user.password:   # password needs to equal the user's password
-        session['user_email'] = user.email # couldn't add the entire user object to the session
-        flash(f'Logged in as {user.email}') #need to edit to reflect a name, not an email
+    if user is None:
+        flash('Wrong email or password!')
+        return redirect('/')
+    
+    elif email == user.email and password == password:
+        session['user_email'] = user.email 
+        flash(f'Logged in as {user.email}!') 
         return redirect('/dashboard')
-
+    
     else:
         flash('Wrong password!')
         return redirect('/')
 
-# route that handles settings updates - get settings data
 @app.route('/user-settings')
 def get_settings():
     """Get and show a user's settings."""
-    # print(session['user_email'])
-    # print("\n"*20)
 
     # get user and info from the database using sessions
     user = crud.get_user_by_email(session['user_email'])
@@ -144,26 +147,56 @@ def update_user_settings():
     """Update user's settings based on user input."""
 
     user = crud.get_user_by_email(session['user_email'])
-    
-    # print(dir(user))
 
     if request.method == 'POST':
         # get the user - modify the dict
-        new_settings_dict = {
-            'fname': request.form.get('fname'),
-            'lname': request.form.get('lname'),
-            'city': request.form.get('city'),
-            'country_code': request.form.get('country'),
-            'phone': request.form.get('phone'),
-            'age': request.form.get('age'),
-            'ideal_temp_f': request.form.get('idealtemp'),
-            'email': request.form.get('email'),
-            'password': request.form.get('password'),
-            'opted_in': request.form.get('optin')
-        }
-        # use the user's email to update settings via crud file
-        updated_user = crud.update_settings(user, new_settings_dict) 
+        fname = request.form.get('fname')
+        lname = request.form.get('lname')
+        city = request.form.get('city')
+        country_code = request.form.get('country_code')
+        phone = request.form.get('phone')
+        age = request.form.get('age')
+        ideal_temp_f = request.form.get('idealtemp')
+        email = request.form.get('email')
+        password = request.form.get('password')
+        opted_in = ("Yes" if request.form.get('optin') else "No") #ternary expression
 
+        # standardize data
+        fname = fname.title()
+        lname = lname.title()
+        city = city.title()
+        email = email.lower()
+        # age = int(age)
+        # ideal_temp_f = int(ideal_temp_f)
+
+        # lst = [age, ideal_temp_f]
+
+        # for item in lst:
+        #     if age < 0 or age > 119: 
+        #         flash ('Please enter a valid age.')
+        #         return render_template('update_settings.html', user=user)
+
+        #     if ideal_temp_f < 0 or ideal_temp_f > 130:
+        #         flash ('Please enter a valid temperature.')
+        #         return render_template('update_settings.html', user=user)
+
+
+        new_settings_dict = {
+            'fname': fname,
+            'lname': lname,
+            'city': city,
+            'country_code': country_code,
+            'phone': phone,
+            'age': age,
+            'ideal_temp_f': ideal_temp_f,
+            'email': email,
+            'password': password,
+            'opted_in': opted_in 
+        }
+
+        # use the user's email to update settings via crud file
+        updated_user = crud.update_settings(user, new_settings_dict)
+    
         
         flash('Your settings have been updated!')
 
@@ -172,16 +205,36 @@ def update_user_settings():
     else:
         return render_template('update_settings.html', user=user)
 
+@app.route('/reset-password', methods=['GET','POST'])
+def reset_password():
+    """Resets a password."""
+    user = crud.get_user_by_email(session['user_email'])
 
-# @app.route('/logout')
-# def logout():
-#     """Log a user out"""
+    if request.method == 'POST':
+        password = request.form.get('password')
+    
+        new_password_dict = {
+            'password': password
+        }
 
-#     del session['user_email']
+        updated_user = crud.update_settings(user, new_password_dict)
+
+        flash('Your password has been updated!')
+        
+        return redirect("/")
     
-#     flash("You have successfully logged out.")
+    else:
+        return render_template('reset_password.html')
+
+@app.route('/logout')
+def logout():
+    """Log a user out"""
+
+    del session['user_email']
     
-#     return redirect("/")
+    flash("You have logged out.")
+    
+    return redirect("/")
 
 # route for static resilience page - accessed through Dashboard
 @app.route('/resilience-resources')

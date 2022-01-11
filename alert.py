@@ -1,16 +1,16 @@
 """Alert script"""
 from datetime import date
 from model import connect_to_db, User, AlertType, IndividualAlerts
-import requests, crud, twilio, json
-import schedule
-import time
+import requests, crud
+import json
+# import jsonify
 import os
 from twilio.rest import Client
-# from pprint import pprint
+from pprint import pprint
 
-from flask import (app, Flask, render_template, request, flash, session,
-                   redirect, json, jsonify)
-from flask_sqlalchemy import SQLAlchemy
+# from flask import (app, Flask, render_template, request, flash, session,
+#                    redirect)
+# from flask_sqlalchemy import SQLAlchemy
 
 os.system('source secrets.sh') #runs command line script in console 
 
@@ -25,14 +25,13 @@ openweatherkey = os.environ['OPENWEATHER_KEY']
 def get_user():
     """Gets users, calls API, alerts users."""
     # retrieve opted-in user location (city) data using SQLAlchemy 
-    users = User.query.filter_by(opted_in=True).all() # returns a list
+    users = User.query.filter_by(opted_in="Yes").all() # returns a list
 
-    # make a dict of all the users' unique cities and a list of phone numbers
-    cities = dict() #make a set - optize
+    # make a set of all the users' unique cities 
+    cities = set()
 
     for user in users:
-        cities.append(user.city) # attribute
-
+        cities.add(user.city) # attribute
 
     results = dict() # needs to be outside of the city for-loop, or else it will get reset
 
@@ -49,7 +48,7 @@ def get_user():
 
         weather = response.json() #--> turn JSON response into Python dict
 
-        #pprint(weather)
+        pprint(weather)
 
         # extract data returned from API call
         weather_results = weather['list'] # a list of dictionaries
@@ -61,14 +60,14 @@ def get_user():
         # loop over the 40 weather results to get timestamp, temp, and humidity (for each city)
         for i in range(len(weather_results)): 
 
-            timestamp = weather_results[i].get('dt_txt') #value
+            # timestamp = weather_results[i].get('dt_txt') #value
             temp = weather_results[i]['main'].get('temp')
             humidity = weather_results[i]['main'].get('humidity')
 
             # run calculate_heat_index for each timestamp
             heat_index = crud.calculate_heat_index(temp, humidity)
             
-            # update heat indexes list - get 40 heat indexes per city
+            # update heat indexes list - get 8 heat indexes per city
             # heat_indexes.append((heat_index, timestamp)) #--> with timestamp
             heat_indexes.append(heat_index)
 
@@ -81,6 +80,7 @@ def get_user():
 
     # print(results)
     # print(heat_indexes)
+    
     # Twilio API calls: loop over users -  if they are in city, send message
     i = 0
     date_sent = date.today()
@@ -137,14 +137,15 @@ def get_user():
         else:
             return
 
-# #2.0 - if the calculated heat index is 20% hotter than the ideal temperature provided, send tailored alert
+#2.0 - if the calculated heat index is 20% hotter than the ideal temperature provided, send tailored alert
 
 # Helps execute code
 if __name__ == "__main__":
     # DebugToolbarExtension(app)
     from server import app
     connect_to_db(app, 'heat-resilience-app')
-    app.run(host="0.0.0.0", debug=True)
+    get_user()
+    # app.run(host="0.0.0.0", debug=True) #--> don't need to run app
 
 # schedule the code for every day at 12am
 # Every day at 12am or 00:00 time get_user() is called

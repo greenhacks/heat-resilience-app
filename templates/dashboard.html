@@ -14,42 +14,54 @@
 
 
 {% block body %}
-<!-- React component begins -->
-  <div 
-    id="root">
+<nav class="navbar navbar-light" style="background-color: #CF5C36;">
+  <div class="d-flex" id="nav-bar">
+      <a class="navbar-brand mr-auto p-2">Heat Resilience App</a> 
+      <a class="nav-link p-2" href="/dashboard">Dashboard</a>
+      <a class="nav-link p-2" href="/resilience-resources">Resilience Resources</a>
+      <a class="nav-link p-2" href="/about">About</a>
+      
   </div>
-  <script type="text/jsx" src="/static/chart.jsx"></script>
-
-<h1><label>Dashboard</label></h1>
-
-  <div>
-    <h2>Hi, {{fname}}!</h2>
+  <div class="d-flex">
+    <a class="nav-link p-2" href="/user-settings">Settings</a>
+    <a class="nav-link ml-auto p-2" href="/logout">Log out</a>
   </div>
-  <h3>Track your alerts over time:</h3>
+</nav>
 
-  <!-- Chart.js -->
-  <div> 
-    <canvas id="line-chart"></canvas>
+<div class='container-fluid'>
+
+  <!-- Bootstrap for Nav Bar -->
+
+
+<div>
+  <h1><label>Dashboard</label></h1>
+    <div>
+      <h2>Hi, {{fname}}!</h2>
+      {% if alerts != 0 %}
+      
+      <h3>Track your alerts over time:</h3>
+
+      <div class="chart-container"> 
+        <canvas id="line-chart"></canvas>
+      </div>
+        
+      <script src="static/chart.js"></script>
+      
+      <div>
+        You have received a total of {{alerts}} alerts.
+      </div>
+      {% else %}
+
+      <h3>You have received no alerts yet.</h3>
+
+    {% endif %}
+
+      <!-- React component begins -->
+      <div 
+        id="root">
+      </div>
+      <script type="text/jsx" src="/static/homepage.jsx"></script>
+
+    </div>
   </div>
-  
-  {% if alerts != 0 %}
-  <script src="static/chart.js"></script>
-  {% endif %}
-
-  <div>You have received a total of {{alerts}} alerts.</div>
-
-  <p> 
-    <a href="/about">About</a>
-   </p>
-
-   <p> 
-    <a href="/resilience-resources">Resilience Resources</a>
-   </p>
-  <p> 
-   <a href="/user-settings">Settings</a>
-  </p>
-
-  <p> 
-    <a href="/logout">Log out</a>
-   </p>
 {% endblock %}

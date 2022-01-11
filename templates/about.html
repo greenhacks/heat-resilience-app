@@ -2,10 +2,33 @@
 {% block title %}Heat Resilience App - About{% endblock %}
 
 {% block body %}
+<nav class="navbar navbar-light" style="background-color: #CF5C36;">
+    <div class="d-flex" id="nav-bar">
+        <a class="navbar-brand mr-auto p-2">Heat Resilience App</a> 
+        <a class="nav-link p-2" href="/dashboard">Dashboard</a>
+        <a class="nav-link p-2" href="/resilience-resources">Resilience Resources</a>
+        <a class="nav-link p-2" href="/about">About</a>
+        
+    </div>
+    <div class="d-flex">
+      <a class="nav-link p-2" href="/user-settings">Settings</a>
+      <a class="nav-link ml-auto p-2" href="/logout">Log out</a>
+    </div>
+  </nav>
+  
+<div class='container-fluid'>
+    
 <h1>About</h1>
+1. How does this work?
 
+2. Why use the heat index instead of ambient temperature?
+
+You can find more information in this New York Times article:
+
+3. 
 
 <p> 
 <a href="/dashboard">Go back to the Dashboard.</a>
 </p>
+</div>
 {% endblock %}
