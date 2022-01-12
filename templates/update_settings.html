@@ -2,21 +2,9 @@
 {% block title %}Heat Resilience App{% endblock %}
 
 {% block body %}  
-<nav class="navbar navbar-light" style="background-color: #CF5C36;">
-  <div class="d-flex" id="nav-bar">
-      <a class="navbar-brand mr-auto p-2">Heat Resilience App</a> 
-      <a class="nav-link p-2" href="/dashboard">Dashboard</a>
-      <a class="nav-link p-2" href="/resilience-resources">Resilience Resources</a>
-      <a class="nav-link p-2" href="/about">About</a>
-      
-  </div>
-  <div class="d-flex">
-    <a class="nav-link p-2" href="/user-settings">Settings</a>
-    <a class="nav-link ml-auto p-2" href="/logout">Log out</a>
-  </div>
-</nav>
 
   <!-- Update for accessibility -->
+  <div class="settings">
   <h2>Update your user settings here:</h2>
   <form action="/user-settings-update" method="POST">
     <p>
@@ -76,8 +64,9 @@
     </p>
   </form>
 
+
   <div>
     <a href="/dashboard"> Return to Dashboard</a>
   </div>
-
+</div>
 {% endblock %}

@@ -111,7 +111,7 @@ def handle_login():
         flash('Wrong email or password!')
         return redirect('/')
     
-    elif email == user.email and password == password:
+    elif email == user.email and password == user.password:
         session['user_email'] = user.email 
         flash(f'Logged in as {user.email}!') 
         return redirect('/dashboard')

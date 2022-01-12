@@ -22,9 +22,10 @@ fetch('/monthly-alerts.json')
             datasets: [{
                 label: 'Alerts', data,
                 fill: false,
-                borderColor: 'rgb(75, 192, 192)',
+                borderColor: 'rgb(207, 92, 54)',
                 tension: 0.1,
             }]
         }
         }
-    )});
+    )
+});

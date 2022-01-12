@@ -14,54 +14,42 @@
 
 
 {% block body %}
-<nav class="navbar navbar-light" style="background-color: #CF5C36;">
-  <div class="d-flex" id="nav-bar">
-      <a class="navbar-brand mr-auto p-2">Heat Resilience App</a> 
-      <a class="nav-link p-2" href="/dashboard">Dashboard</a>
-      <a class="nav-link p-2" href="/resilience-resources">Resilience Resources</a>
-      <a class="nav-link p-2" href="/about">About</a>
-      
-  </div>
-  <div class="d-flex">
-    <a class="nav-link p-2" href="/user-settings">Settings</a>
-    <a class="nav-link ml-auto p-2" href="/logout">Log out</a>
-  </div>
-</nav>
-
 <div class='container-fluid'>
 
   <!-- Bootstrap for Nav Bar -->
 
 
-<div>
-  <h1><label>Dashboard</label></h1>
-    <div>
-      <h2>Hi, {{fname}}!</h2>
-      {% if alerts != 0 %}
-      
-      <h3>Track your alerts over time:</h3>
+  <div>
+    <h1>
+      <label>Dashboard</label>
+    </h1>
 
-      <div class="chart-container"> 
-        <canvas id="line-chart"></canvas>
-      </div>
-        
-      <script src="static/chart.js"></script>
-      
       <div>
-        You have received a total of {{alerts}} alerts.
-      </div>
-      {% else %}
+        <h2>Hi, {{fname}}!</h2>
+        {% if alerts != 0 %}
+        
+        <h3>Track your alerts over time:</h3>
 
-      <h3>You have received no alerts yet.</h3>
+        <div class="chart-container"> 
+          <canvas id="line-chart"></canvas>
+        </div>
+          
+        <script src="static/chart.js"></script>
+        
+        <div>
+          <h5>You have received a total of {{alerts}} alerts.</h5>
+        </div>
+        {% else %}
 
-    {% endif %}
+        <h3>You have received no alerts yet.</h3>
 
+      {% endif %}
       <!-- React component begins -->
       <div 
         id="root">
       </div>
       <script type="text/jsx" src="/static/homepage.jsx"></script>
+    </div>
 
     </div>
-  </div>
-{% endblock %}
+  {% endblock %}

@@ -2,34 +2,18 @@
 {% block title %}Heat Resilience App{% endblock %}
 
 {% block body %}  
-<nav class="navbar navbar-light" style="background-color: #CF5C36;">
-  <div class="d-flex" id="nav-bar">
-      <a class="navbar-brand mr-auto p-2">Heat Resilience App</a> 
-      <a class="nav-link p-2" href="/dashboard">Dashboard</a>
-      <a class="nav-link p-2" href="/resilience-resources">Resilience Resources</a>
-      <a class="nav-link p-2" href="/about">About</a>
-      
-  </div>
-  <div class="d-flex">
-    <a class="nav-link p-2" href="/user-settings">Settings</a>
-    <a class="nav-link ml-auto p-2" href="/logout">Log out</a>
-  </div>
-</nav>
-
-  <!-- Update for accessibility -->
-  <h2> <label>Settings </label> </h2>
-    <div id="settings">
-
-      <li>First Name: {{fname}}</li>
-      <li>Last Name: {{lname}}</li>
-      <li>Email: {{email}}</li>
-      <li>City: {{city}}</li>
-      <li>Country: {{country_code}}</li>
-      <li>Phone: {{phone}}</li>
-      <li>Age: {{age}}</li>
-      <li>Ideal Air Temperature: {{ideal_temp}}</li>
-      <li>Opted in for Heat Alerts: {{opted_in}}</li>
-
+  <div class="settings">
+    <h2> <label>Settings </label> </h2>
+    <div id="settings-list">
+      <li><b>First Name:</b> {{fname}}</li>
+      <li><b>Last Name:</b> {{lname}}</li>
+      <li><b>Email:</b> {{email}}</li>
+      <li><b>City:</b> {{city}}</li>
+      <li><b>Country:</b> {{country_code}}</li>
+      <li><b>Phone:</b> {{phone}}</li>
+      <li><b>Age:</b> {{age}}</li>
+      <li><b>Ideal Air Temperature:</b> {{ideal_temp}}</li>
+      <li><b>Opted in for Heat Alerts:</b> {{opted_in}}</li>
     </div>
 
     <div>
@@ -39,5 +23,7 @@
     <div>
      <a href="/dashboard"> Return to dashboard</a>
     </div>
+
+  </div>
 
 {% endblock %}

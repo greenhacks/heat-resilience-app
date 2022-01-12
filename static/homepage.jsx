@@ -11,7 +11,7 @@ function ClickCounter(props) {
 function ClickComponent({buttonClick}) {
   return (
       <button type="button" onClick={buttonClick}>
-        Click me to increase the count
+        Click here to count many people you shared your results with
       </button>
   );
 }

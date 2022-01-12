@@ -16,20 +16,32 @@
     </title>
     {% block head %}{% endblock %}
   </head>
+    <!-- Nav bar -->
+    <nav class="navbar navbar-light">
+      <div class="d-flex" id="nav-bar">
+          <a class="navbar-brand mr-auto mt-0 ms-3">Heat Resilience App</a> 
+          <a class="nav-link" href="/dashboard">Dashboard</a>
+          <a class="nav-link" href="/resilience-resources">Resilience Resources</a>
+      </div>
+    
+      <div class="d-flex" id="nav-bar">
+          <a class="nav-link" href="/about">About</a>
+          <a class="nav-link" href="/user-settings">Settings</a>
+          <a class="nav-link ms-auto" href="/logout">Log out</a>
+      </div>
+    </nav>
 
-  <body>
     {% for msg in get_flashed_messages() %}
-    <!-- Bootstrap begins -->
       <div class="alert alert-warning alert-dismissible show" role="alert">
-        <p class="flash-msg">
+        <p class="flash-msg mb-0">
           {{ msg }}
         </p>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
-       <!-- Bootstrap ends -->
+
     {% endfor %}
 
-
+    <body>
     {% block body %} {% endblock %}
 
     {% block after_body %}{% endblock %}
