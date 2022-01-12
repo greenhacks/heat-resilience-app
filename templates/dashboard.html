@@ -16,40 +16,40 @@
 {% block body %}
 <div class='container-fluid'>
 
-  <!-- Bootstrap for Nav Bar -->
-
-
   <div>
-    <h1>
+    <!-- <h1>
       <label>Dashboard</label>
-    </h1>
+    </h1> -->
 
       <div>
         <h2>Hi, {{fname}}!</h2>
         {% if alerts != 0 %}
         
-        <h3>Track your alerts over time:</h3>
+        <!-- <h3>Track your alerts over time:</h3> -->
 
         <div class="chart-container"> 
           <canvas id="line-chart"></canvas>
-        </div>
           
-        <script src="static/chart.js"></script>
-        
-        <div>
-          <h5>You have received a total of {{alerts}} alerts.</h5>
-        </div>
+          <script src="static/chart.js"></script>
+
+        <div class="row">
+          <div class="col-6">
+            <h5>Total alerts received: {{alerts}}</h5>
+          </div>
+      </div>
+
         {% else %}
-
-        <h3>You have received no alerts yet.</h3>
-
+        <div>
+          <h3>You have received no alerts yet.</h3>
+        </div>
       {% endif %}
+
       <!-- React component begins -->
-      <div 
+      <!-- <div 
         id="root">
       </div>
       <script type="text/jsx" src="/static/homepage.jsx"></script>
-    </div>
+    </div> -->
 
     </div>
   {% endblock %}

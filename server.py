@@ -113,7 +113,7 @@ def handle_login():
     
     elif email == user.email and password == user.password:
         session['user_email'] = user.email 
-        flash(f'Logged in as {user.email}!') 
+        # flash(f'Logged in as {user.email}!') 
         return redirect('/dashboard')
     
     else:
@@ -208,11 +208,14 @@ def update_user_settings():
 @app.route('/reset-password', methods=['GET','POST'])
 def reset_password():
     """Resets a password."""
-    user = crud.get_user_by_email(session['user_email'])
+    
 
     if request.method == 'POST':
-        password = request.form.get('password')
-    
+        email = request.form.get('resetemail')
+        password = request.form.get('resetpassword')
+
+        user = crud.get_user_by_email(email)
+
         new_password_dict = {
             'password': password
         }

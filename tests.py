@@ -10,10 +10,6 @@ class FlaskAppTests (unittest.TestCase):
         self.client = app.test_client()
         app.config['TESTING'] = True
 
-    def tearDown(self):
-        """Tear down after each test."""
-
-
     def test_show_homepage(self):
         """Test that homepage HTML renders."""
         

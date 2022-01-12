@@ -2,27 +2,61 @@
 {% block title %}Heat Resilience App{% endblock %}
 
 {% block body %}  
-  <div class="settings">
+  <div class="container-fluid">
+    
     <h2> <label>Settings </label> </h2>
-    <div id="settings-list">
-      <li><b>First Name:</b> {{fname}}</li>
-      <li><b>Last Name:</b> {{lname}}</li>
-      <li><b>Email:</b> {{email}}</li>
-      <li><b>City:</b> {{city}}</li>
-      <li><b>Country:</b> {{country_code}}</li>
-      <li><b>Phone:</b> {{phone}}</li>
-      <li><b>Age:</b> {{age}}</li>
-      <li><b>Ideal Air Temperature:</b> {{ideal_temp}}</li>
-      <li><b>Opted in for Heat Alerts:</b> {{opted_in}}</li>
-    </div>
 
     <div>
-      Click <a href="/user-settings-update"> here</a> to update your settings. 
+      <a href="/user-settings-update"> Edit settings</a>
     </div>
     
-    <div>
-     <a href="/dashboard"> Return to dashboard</a>
-    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Setting</th>
+          <th scope="col">Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">First Name</th>
+          <td colspan="2">{{fname}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Last Name</th>
+          <td colspan="2">{{lname}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Email</th>
+          <td colspan="2">{{email}}</td>
+        </tr>
+        <tr>
+          <th scope="row">City</th>
+          <td colspan="2">{{city}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Country</th>
+          <td colspan="2">{{country_code}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Phone</th>
+          <td colspan="2">{{phone}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Age (Years)</th>
+          <td colspan="2">{{age}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Ideal Temperature (F)</th>
+          <td colspan="2">{{ideal_temp}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Opted in for Heat Alerts</th>
+          <td colspan="2">{{opted_in}}</td>
+        </tr>
+      </tbody>
+    </table>
+
 
   </div>
 

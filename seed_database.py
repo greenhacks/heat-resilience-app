@@ -100,22 +100,31 @@ threshold_4 = crud.create_alert(msg_4, "129.3+")
 format = "%d-%b-%Y"
 
 for _ in range(12):
-    date_str1 = "12-Jan-2021"
+    date_str1 = "12-Mar-2021"
     date1 = datetime.strptime(date_str1, format)
     alert_type_id = 1
     db_test_alerts = crud.create_individual_alert(1, alert_type_id, date1)
 
-    # date_str2 = "11-Jul-2021"
-    # date2 = datetime.strptime(date_str2, format)
-    # alert_type_id = 2
-    # db_test_alerts = crud.create_individual_alert(2, alert_type_id, date2)
+for _ in range(25):
+    date_str2 = "11-May-2021"
+    date2 = datetime.strptime(date_str2, format)
+    alert_type_id = 2
+    db_test_alerts = crud.create_individual_alert(1, alert_type_id, date2)
 
-    # date_str3 = "01-Jan-2021"
-    # date3 = datetime.strptime(date_str3, format)
-    # alert_type_id = 3
-    # db_test_alerts = crud.create_individual_alert(3, alert_type_id, date3)
+for _ in range(30):
+    date_str2 = "11-Jul-2021"
+    date2 = datetime.strptime(date_str2, format)
+    alert_type_id = 3
+    db_test_alerts = crud.create_individual_alert(1, alert_type_id, date2)
 
-    # date_str4 = "11-Aug-2021"
-    # date4 = datetime.strptime(date_str4, format)
-    # alert_type_id = 4
-    # db_test_alerts = crud.create_individual_alert(4, alert_type_id, date4)
+for _ in range(30):
+    date_str3 = "01-Aug-2021"
+    date3 = datetime.strptime(date_str3, format)
+    alert_type_id = 3
+    db_test_alerts = crud.create_individual_alert(1, alert_type_id, date3)
+
+for _ in range(5):
+    date_str4 = "11-Dec-2021"
+    date4 = datetime.strptime(date_str4, format)
+    alert_type_id = 1
+    db_test_alerts = crud.create_individual_alert(1, alert_type_id, date4)

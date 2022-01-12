@@ -3,70 +3,89 @@
 
 {% block body %}  
 
-  <!-- Update for accessibility -->
-  <div class="settings">
-  <h2>Update your user settings here:</h2>
-  <form action="/user-settings-update" method="POST">
-    <p>
-      <label>First Name: </label> 
-      <input type="text" name="fname" value="{{user.fname}}">
-    </p>
-    <p>
-      <label>Last Name: </label>
-      <input type="text" name="lname" value="{{user.lname}}">
-    </p>
-    <p>
-      <label>City: </label>
-      <input type="text" name="city" value="{{user.city}}">
-    </p>
-    <p>
-      <label>Country Code: </label> 
-      <input type="text" name="country" value="{{user.country_code}}">
-    </p>
+<div class="container-fluid" id="user-settings">
+  <div class="row"> 
+    <div class="col">
+    <h2>Update your user settings here:</h2>
+      <form action="/user-settings-update" method="POST">
+        <div class="mb-1">
+          <label for="exampleInputFName1" class="form-label">First name</label>
+          <input type="text" class="form-control" id="exampleInputFName1" aria-describedby="fnameHelp"
+          required name="fname" value="{{user.fname}}">
+        </div>
+        
+        <div class="mb-1">
+          <label for="exampleInputLName1" class="form-label">Last name</label>
+          <input type="text" class="form-control" id="exampleInputLName1" aria-describedby="lnameHelp"
+          name="lname" value="{{user.lname}}">
+        </div>
 
-    <p>
-      <label>Phone: </label>
-      <input type="text" name="phone" value="{{user.phone}}" pattern=
-                  "^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$">
-    </p>
-    <p>
-      <label>Age (years) : </label>
-      <input type="number" name="age" placeholder="e.g. 45" value="{{user.age}}">
-    </p>
-    <p>
-      <label>Ideal Air Temperature (F): </label> <input type="number" name="idealtemp" 
-            placeholder="e.g. 73" value="{{user.ideal_temp_f}}">
-    </p>
-    <p>
-      <label>Opt in for heat alerts: </label> 
-      {% if user.opted_in == None or user.opted_in == "No" %}
-                
-        <input type="checkbox" name="optin" value="Yes">
+        <div class="mb-1">
+          <label for="exampleInputCity1" class="form-label">City</label>
+          <input type="text" class="form-control" id="exampleInputCity1" aria-describedby="cityHelp"
+          required name="city" value="{{user.city}}">
+        </div>
+      
+        <div class="mb-1">
+          <label for="exampleInputCountry1" class="form-label">Country</label>
+          <input type="text" class="form-control" id="exampleInputCountry1" aria-describedby="countryHelp"
+          required name="country_code" value="{{user.country_code}}">
+          <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+        </div>
+      
+        <div class="mb-1">
+          <label for="exampleInputPhone1" class="form-label">Phone</label>
+          <input type="text" class="form-control" id="exampleInputPhone1" aria-describedby="phoneHelp" 
+          required name="phone" value="{{user.phone}}" pattern=
+          "^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$">
+        </div>
+        
+        <div class="mb-1">
+          <label for="exampleInputAge1" class="form-label">Age (Years)</label>
+          <input type="number" class="form-control" id="exampleInputPhone1" aria-describedby="ageHelp"
+          name="age" placeholder="e.g. 45" value="{{user.age}}">
+        </div>
 
-      {% else %}
+        <div class="mb-1">
+          <label for="exampleInputIdealTemp1" class="form-label">Ideal Air Temperature (F)</label>
+          <input type="number" class="form-control" id="exampleInputIdealTemp1" aria-describedby="idealTempHelp"
+          placeholder="e.g. 73" value="{{user.ideal_temp_f}}" name="idealtemp">
+        </div>
 
-        <input type="checkbox" name="optin" checked="True">
+        <div class="mb-1">
+          <label for="exampleInputEmail1" class="form-label">Email</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+          required name="email" value="{{user.email}}">
+        </div>
+      
+        <div class="mb-1">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1"
+          name="password">
+        </div>
+      
+        <div>
+          <label>Opt in for heat alerts: </label> 
+          {% if user.opted_in == None or user.opted_in == "No" %}
+                    
+            <input type="checkbox" name="optin" value="Yes">
 
-      {% endif %}
+          {% else %}
 
-    </p>
-    
-    <p>
-      <label>Email: </label>
-      <input type="text" name="email" value="{{user.email}}">
-    </p>
-    <p>
-      <label>Password: </label>
-      <input type="password" name="password">
-    </p>
-    <p>
-      <input type="submit">
-    </p>
-  </form>
+            <input type="checkbox" name="optin" checked="True">
 
+          {% endif %}
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      
+      </form>
 
-  <div>
-    <a href="/dashboard"> Return to Dashboard</a>
+    </div>
+    <div class= "col">
+      <img id="icecream-img" src="/static/icecream_sm.jpg">
+    </div>
   </div>
 </div>
+
 {% endblock %}
