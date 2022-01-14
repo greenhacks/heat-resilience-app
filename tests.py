@@ -1,5 +1,4 @@
 import unittest
-import crud, server, alert
 from server import app
 
 class FlaskAppTests (unittest.TestCase):
