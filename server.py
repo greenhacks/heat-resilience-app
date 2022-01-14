@@ -216,6 +216,14 @@ def reset_password():
     else:
         return render_template('reset_password.html')
 
+@app.route('/alert')
+def click_alert():
+    """Gets text alert on click - for demo only."""
+
+    alert.get_user()
+
+    return redirect('/dashboard')
+
 @app.route('/logout')
 def logout():
     """Log a user out"""
