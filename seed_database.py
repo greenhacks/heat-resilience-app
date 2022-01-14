@@ -62,7 +62,8 @@ db.create_all()
 #     opted_in = "Yes"
 
 #     db_user = crud.create_user(fname, city, country_code, phone, email, password, opted_in) 
-fname = 'User1'
+
+fname = "User1"
 # zipcode = f'{n + 90000}'
 city = "Los Angeles"
 country_code = "US"
@@ -73,19 +74,13 @@ opted_in = 'Yes'
 
 db_user = crud.create_user(fname, city, country_code, phone, email, password, opted_in) 
     
-msg_1 = """Caution. The heat index may fall between 80-90 degrees (F). 
-    Fatigue is possible with prolonged exposure and/or physical activity."""
+msg_1 = """Caution. The heat index may fall between 80-90 degrees (F). Fatigue is possible with prolonged exposure and/or physical activity."""
 
-msg_2 = """Extreme caution. The heat index may fall between 90-106 degrees (F). 
-    Heat stroke, heat cramps, or heat exhaustion possible with prolonged 
-    exposure and/or physical activity."""
+msg_2 = """Extreme caution. The heat index may fall between 90-106 degrees (F). Heat stroke, heat cramps, or heat exhaustion possible with prolonged exposure and/or physical activity."""
 
-msg_3 = """Danger. The heat index may fall between 106 to 129 degrees (F). Heat
-    cramps or heat exhaustion likely. Heat stroke possible with prolonged 
-    exposure and/or physical activity. Run your AC."""
+msg_3 = """Danger. The heat index may fall between 106 to 129 degrees (F). Heat cramps or heat exhaustion likely. Heat stroke possible with prolonged exposure and/or physical activity. Run your AC."""
 
-msg_4 = """Extreme danger. The heat index may be above 129 degrees (F). Heat
-    stroke likely. Run your AC."""
+msg_4 = """Extreme danger. The heat index may be above 129 degrees (F). Heat stroke likely. Run your AC."""
 
 # create the alert messages
 threshold_1 = crud.create_alert(msg_1, "78.8-89.6")
