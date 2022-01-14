@@ -8,10 +8,6 @@ import os
 from twilio.rest import Client
 from pprint import pprint
 
-# from flask import (app, Flask, render_template, request, flash, session,
-#                    redirect)
-# from flask_sqlalchemy import SQLAlchemy
-
 os.system('source secrets.sh') #runs command line script in console 
 
 # Twilio info:
@@ -73,14 +69,6 @@ def get_user():
             heat_indexes.append(heat_index)
 
         results[city] = max(heat_indexes) #heat_indexes is a list that will be the value (original)
-    
-    # Testing: loop over the heat indexes
-    # for city in results.keys():
-    #     print(city)
-    #     print(results[city])
-
-    # print(results)
-    # print(heat_indexes)
     
     # Twilio API calls: loop over users -  if they are in city, send message
     i = 0

@@ -166,19 +166,6 @@ def update_user_settings():
         lname = lname.title()
         city = city.title()
         email = email.lower()
-        # age = int(age)
-        # ideal_temp_f = int(ideal_temp_f)
-
-        # lst = [age, ideal_temp_f]
-
-        # for item in lst:
-        #     if age < 0 or age > 119: 
-        #         flash ('Please enter a valid age.')
-        #         return render_template('update_settings.html', user=user)
-
-        #     if ideal_temp_f < 0 or ideal_temp_f > 130:
-        #         flash ('Please enter a valid temperature.')
-        #         return render_template('update_settings.html', user=user)
 
 
         new_settings_dict = {
@@ -239,14 +226,13 @@ def logout():
     
     return redirect("/")
 
-# route for static resilience page - accessed through Dashboard
 @app.route('/resilience-resources')
 def show_resilience():
-    """Show the resilience resources page"""
+    """Show the Resilience Resources page"""
 
     return render_template('resources.html')
 
-# route for static about page - accessed through Dashboard
+
 @app.route('/about')
 def show_about():
     """Show the About page"""
