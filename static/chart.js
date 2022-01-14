@@ -34,7 +34,7 @@ fetch('/monthly-alerts.json')
                 borderColor: 'rgb(207, 92, 54)',
                 tension: 0.1,
                 radius: 1,
-                borderWidth: 5,
+                borderWidth: 4,
                 borderJoinStyle: 'miter',
             }]
         }, 
