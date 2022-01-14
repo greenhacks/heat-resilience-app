@@ -17,7 +17,6 @@ def connect_to_db(app, db_name):
     db.init_app(app)
     app.app_context().push()
 
-    #Sean added 12.8.2021
     with app.app_context(): 
         db.create_all()
 
@@ -32,17 +31,15 @@ class User(db.Model):
     fname = db.Column(db.String(25), nullable=False)
     lname = db.Column(db.String(25))
     city = db.Column(db.String(50), nullable=False)
-    # state = db.Column(db.String(20))
-    # zipcode = db.Column(db.String, nullable=False) 2.0 feature; changed from int to string to account for Python processing leading zeroes
     country_code = db.Column(db.String(30), nullable=False)
-    phone = db.Column(db.String(15), nullable=False) #Review
+    phone = db.Column(db.String(15), nullable=False) 
     email = db.Column(db.String, unique=True, nullable=False)
     password = db.Column(db.String, nullable=False)
-    age = db.Column(db.Integer) #review - 2.0 feature
-    ideal_temp_f = db.Column(db.Integer) #review - 2.0 feature?
+    age = db.Column(db.Integer)
+    ideal_temp_f = db.Column(db.Integer) 
     opted_in = db.Column(db.String)
 
-    indiv_alerts = db.relationship("IndividualAlerts", back_populates="user") #refers to line 
+    indiv_alerts = db.relationship("IndividualAlerts", back_populates="user")  
 
     def __repr__(self):
         return f'<User user_id={self.user_id} email={self.email}>'
@@ -73,13 +70,13 @@ class IndividualAlerts(db.Model):
     alert_type_id = db.Column(db.Integer, db.ForeignKey("alerttype.alert_type_id"), nullable=False)
     date_sent = db.Column(db.DateTime)
 
-    user = db.relationship("User", back_populates="indiv_alerts") #refers to line
-    alert_type = db.relationship("AlertType", back_populates="indiv_alerts") #refers to line 
+    user = db.relationship("User", back_populates="indiv_alerts")
+    alert_type = db.relationship("AlertType", back_populates="indiv_alerts")  
 
     def __repr__(self):
         return f'<Indiv alert: indiv_alert_id={self.indiv_alert_id}, user_id={self.user_id}, date_sent={self.date_sent}>'
 
-# do I need the below in this file? keep as is
+
 if __name__ == "__main__":
     from server import app
     app.app_context()
