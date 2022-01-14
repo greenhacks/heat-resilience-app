@@ -15,42 +15,41 @@
 
 {% block body %}
 <div class='container-fluid' id="welcome">
+
   <div class="row">
     <div class="col-10">
       <h1>Hi, {{fname}}!</h1>
+    </div>
+    <div class="col-2" id="totalalerts">
+      <div>
+        <h5>Total alerts received: {{alerts}}</h5>
       </div>
+    </div>
+  </div>
 
-        <div class="col-2" id="totalalerts">
-          <div>
-          <h5>Total alerts received: {{alerts}}</h5>
-          </div>
-        </div>
-      </div>
-    <div class="row">
-      {% if alerts != 0 %}
-        
-      <!-- <h3>Track your alerts over time:</h3> -->
+  <div class="row">
+    {% if alerts != 0 %}
 
-      <div class="chart-container"> 
-        <canvas id="line-chart"></canvas>
+    <div class="chart-container"> 
+      <canvas id="line-chart"></canvas>
           
-        <script src="static/chart.js"></script>
-      </div>
+      <script src="static/chart.js"></script>
+    </div>
        
 
-      {% else %}
-        <div>
-          <h3>You have received no alerts yet.</h3>
-        </div>
-
-      {% endif %}
-    </div>
+    {% else %}
+      <div>
+        <h3>You have received no alerts yet.</h3>
       </div>
-    </div> 
+
+    {% endif %}
+
   </div>
+
+  <div class="row">
+    <a href="/alert" class="btn btn-secondary btn-md active" role="button" aria-pressed="true"
+        style="margin-top: 10px">Demo Only - Alert</a>
+  </div>
+</div>
+
   {% endblock %}
-
-
-  <div class="col-6">
-    <h5>Total alerts received: {{alerts}}</h5>
-  </div>
