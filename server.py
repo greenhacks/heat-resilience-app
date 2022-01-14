@@ -1,8 +1,11 @@
 """Server for the app."""
+import os
+
+os.system("source secrets.sh") #runs command line script in console 
+
 import crud
 import re
 import model
-import os
 import requests
 import alert
 import datetime
@@ -53,7 +56,7 @@ def get_monthly_alerts():
 
     date = datetime.date.today()
 
-    year=date.year
+    year = date.year
     
     monthly_alerts = crud.get_monthly_alerts(user.email) #returns list
 
@@ -247,9 +250,8 @@ def show_about():
 
     return render_template('about.html')
 
-
 # Helps execute code
 if __name__ == "__main__":
     # DebugToolbarExtension(app)
     connect_to_db(app, 'heat-resilience-app')
-    app.run(host="0.0.0.0", debug=True)
+    # app.run(host="0.0.0.0", debug=True) #removed for prod

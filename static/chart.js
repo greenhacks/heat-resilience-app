@@ -6,7 +6,8 @@ fetch('/monthly-alerts.json')
  .then(responseJson => {
     const data = responseJson.data.map(monthlyTotal => (
         
-        {x: monthlyTotal.month, y: monthlyTotal.alerts}
+        {x: monthlyTotal.month, 
+        y: monthlyTotal.alerts}
         
         ));
     console.log(responseJson)

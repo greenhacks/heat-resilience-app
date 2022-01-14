@@ -21,50 +21,7 @@ connect_to_db(server.app, 'heat-resilience-app')
 # creates tables
 db.create_all()
 
-# sample_cities = ['Los Angeles', 'Seattle', 'Miami', 'Houston', 'Raleigh', 'Little Rock', 'Philadelphia', 'Chicago', 'Tucson', 'Nashville']
-
-# creates users based on sample_cities
-# n = 0
-# for city in sample_cities:
-#     fname = f'TestUser {n + 1}'
-#     # zipcode = f'{n + 90000}'
-#     city = sample_cities[n]
-#     country_code = "US"
-#     phone = '+16616076032'
-#     email = f'user{n + 1}@test.com'  
-#     password = f'test{n + 1}'
-#     opted_in = True
-#     n += 1
-
-# creates 10 fake users - loops; change 
-# for n in range(10):
-#     fname = f'TestUser {n + 1}'
-#     # zipcode = f'{n + 90000}'
-#     city = "Los Angeles"
-#     country_code = "US"
-#     phone = '+16616076032'
-#     email = f'user{n + 1}@test.com'  
-#     password = f'test{n + 1}'
-#     opted_in = True
-
-    # create a user here
-    #db_user = crud.create_user(fname, city, country_code, phone, email, password, opted_in) 
-
-# creates 10 fake users - loops; change 
-# for n in range(6):
-#     fname = f'User {n + 1}'
-#     # zipcode = f'{n + 90000}'
-#     city = "Los Angeles"
-#     country_code = "US"
-#     phone = phone_num
-#     email = f'user{n + 1}@test.com'  
-#     password = f'test{n + 1}'
-#     opted_in = "Yes"
-
-#     db_user = crud.create_user(fname, city, country_code, phone, email, password, opted_in) 
-
 fname = "User1"
-# zipcode = f'{n + 90000}'
 city = "Los Angeles"
 country_code = "US"
 phone = phone_num
