@@ -14,7 +14,7 @@
 
 
 {% block body %}
-<div class='container-fluid' id="welcome">
+<div class='container-fluid'>
 
   <div class="row">
     <div class="col-10">
@@ -22,7 +22,7 @@
     </div>
     <div class="col-2" id="totalalerts">
       <div>
-        <h5>Total alerts received: {{alerts}}</h5>
+        <h5>Total received: {{alerts}}</h5>
       </div>
     </div>
   </div>
@@ -39,17 +39,16 @@
 
     {% else %}
       <div>
-        <h3>You have received no alerts yet.</h3>
+        <h4>You haven't received any alerts yet.</h4>
       </div>
 
     {% endif %}
 
   </div>
 
-  <div class="row">
     <a href="/alert" class="btn btn-secondary btn-md active" role="button" aria-pressed="true"
-        style="margin-top: 10px">Demo Only - Alert</a>
-  </div>
+        style="margin-top: 10px">For Demo Purposes Only - Send Alert</a>
+
 </div>
 
   {% endblock %}
