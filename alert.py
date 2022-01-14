@@ -89,7 +89,7 @@ def get_user():
 
                 individual_alert = crud.create_individual_alert(user.user_id, alert.alert_type_id, date_sent) # create individual alert record
         
-            elif results[user.city] >= 106:
+            elif results[user.city] >= 40:
                 message = client.messages.create(
                         body=AlertType.query.filter_by(temp_range="105.9-129.2").first().alert_text,
                         from_='+18509034729',
@@ -100,7 +100,7 @@ def get_user():
                 
                 individual_alert = crud.create_individual_alert(user.user_id, alert.alert_type_id, date_sent) # create individual alert record
 
-            elif results[user.city] >= 90:
+            elif results[user.city] >= 40:
                 message = client.messages.create(
                         body=AlertType.query.filter_by(temp_range="89.7-105.8").first().alert_text,
                         from_='+18509034729',
