@@ -3,7 +3,7 @@
 
 {% block body %}
   
-<div class='container-fluid'>
+<div class='container-fluid' id="staticpages">
 
     <div>
         <h1>About</h1>
@@ -11,34 +11,52 @@
 
     <div>
         <p>
-        This app was made as a final fellowship project for Hackbright Academy. <br>
-        Sam Miyamoto - Katherine Cohort (January 2022)
+        This app was made with love as a final project for Hackbright Academy. <br>
+        (Sam Miyamoto - Katherine Cohort, January 2022)
         </p>
     </div>
 
     <div>
         <h2>FAQs</h2>
     <div>
+
     <div>    
-        <b>1. Why make this app? If it's too hot, just get in the shade or turn on your air conditioning.</b>
+        <b>1) Why make this app?</b>
+        <br>
+        Heat is increasingly catching people unprepared in places such as the Pacific Northwest 
+        where extreme high temperatures are not the norm. <br>
+        <br>
+        Air conditioning is also not readily available always.
+        <br>
+        <br>
 
-        Increasing heat is catching people unprepared. Many places do not have air conditioning, 
     </div>
-
+    <br>
     <div> 
-        <b>2. Why use the heat index instead of ambient temperature as a measure of heat? </b>
-
+        <b>2) Why use the heat index instead of ambient temperature as a measure of thermal comfort? </b>
+        <br>
         The heat index is more accurate because it takes humidity into account. 
-
-        You can find more information in this New York Times article: https://www.nytimes.com/article/what-is-the-heat-index.html
-
-        The formula used to calculate the heat index is here:
+        <br>
+        <br>
+        You can find more information in this New York Times article: 
+        <a href="https://www.nytimes.com/article/what-is-the-heat-index.html" target="_blank" 
+        rel="noopener noreferrer" id="resourcelinks" >What Is the Heat Index, and Why Does It Matter?"</a>
+        <br>
+        <br>
+        Heat indexes for this app are calculated using <a href="https://www.wpc.ncep.noaa.gov/html/heatindex_equation.shtml" target="_blank" 
+        rel="noopener noreferrer" id="resourcelinks">this formula</a>.
     </div>
-
+    <br>
     <div>
-        <b>3. What are the temperature levels that trigger alerts?</b>
+    <b>3) What are the heat index degree (Fahrenheit) thresholds that trigger text alerts?</b>
+    <ol>
+        <li>80-90</li>
+        <li>90-106</li>
+        <li>106-129</li>
+        <li>129+</li>
+      </ol>
     </div>
-    
+
     </p>
 
     </div>

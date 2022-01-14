@@ -14,42 +14,43 @@
 
 
 {% block body %}
-<div class='container-fluid'>
-
-  <div>
-    <!-- <h1>
-      <label>Dashboard</label>
-    </h1> -->
-
-      <div>
-        <h2>Hi, {{fname}}!</h2>
-        {% if alerts != 0 %}
-        
-        <!-- <h3>Track your alerts over time:</h3> -->
-
-        <div class="chart-container"> 
-          <canvas id="line-chart"></canvas>
-          
-          <script src="static/chart.js"></script>
-
-        <div class="row">
-          <div class="col-6">
-            <h5>Total alerts received: {{alerts}}</h5>
-          </div>
+<div class='container-fluid' id="welcome">
+  <div class="row">
+    <div class="col-10">
+      <h1>Hi, {{fname}}!</h1>
       </div>
 
-        {% else %}
+        <div class="col-2" id="totalalerts">
+          <div>
+          <h5>Total alerts received: {{alerts}}</h5>
+          </div>
+        </div>
+      </div>
+    <div class="row">
+      {% if alerts != 0 %}
+        
+      <!-- <h3>Track your alerts over time:</h3> -->
+
+      <div class="chart-container"> 
+        <canvas id="line-chart"></canvas>
+          
+        <script src="static/chart.js"></script>
+      </div>
+       
+
+      {% else %}
         <div>
           <h3>You have received no alerts yet.</h3>
         </div>
+
       {% endif %}
-
-      <!-- React component begins -->
-      <!-- <div 
-        id="root">
-      </div>
-      <script type="text/jsx" src="/static/homepage.jsx"></script>
-    </div> -->
-
     </div>
+      </div>
+    </div> 
+  </div>
   {% endblock %}
+
+
+  <div class="col-6">
+    <h5>Total alerts received: {{alerts}}</h5>
+  </div>

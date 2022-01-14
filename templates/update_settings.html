@@ -3,67 +3,67 @@
 
 {% block body %}  
 
-<div class="container-fluid" id="user-settings">
+<div class="container-fluid" id="staticpages">
   <div class="row"> 
-    <div class="col">
-    <h2>Update your user settings here:</h2>
-      <form action="/user-settings-update" method="POST">
-        <div class="mb-1">
+    <div class="col-4">
+    <h2>Update Your Settings</h2>
+      <form id="user-settings-form" action="/user-settings-update" method="POST">
+        <div class="mb-2">
           <label for="exampleInputFName1" class="form-label">First name</label>
           <input type="text" class="form-control" id="exampleInputFName1" aria-describedby="fnameHelp"
           required name="fname" value="{{user.fname}}">
         </div>
         
-        <div class="mb-1">
+        <div class="mb-2">
           <label for="exampleInputLName1" class="form-label">Last name</label>
           <input type="text" class="form-control" id="exampleInputLName1" aria-describedby="lnameHelp"
           name="lname" value="{{user.lname}}">
         </div>
 
-        <div class="mb-1">
+        <div class="mb-2">
           <label for="exampleInputCity1" class="form-label">City</label>
           <input type="text" class="form-control" id="exampleInputCity1" aria-describedby="cityHelp"
           required name="city" value="{{user.city}}">
         </div>
       
-        <div class="mb-1">
+        <div class="mb-2">
           <label for="exampleInputCountry1" class="form-label">Country</label>
           <input type="text" class="form-control" id="exampleInputCountry1" aria-describedby="countryHelp"
           required name="country_code" value="{{user.country_code}}">
           <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
         </div>
       
-        <div class="mb-1">
+        <div class="mb-2">
           <label for="exampleInputPhone1" class="form-label">Phone</label>
           <input type="text" class="form-control" id="exampleInputPhone1" aria-describedby="phoneHelp" 
           required name="phone" value="{{user.phone}}" pattern=
           "^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$">
         </div>
         
-        <div class="mb-1">
+        <div class="mb-2">
           <label for="exampleInputAge1" class="form-label">Age (Years)</label>
           <input type="number" class="form-control" id="exampleInputPhone1" aria-describedby="ageHelp"
           name="age" placeholder="e.g. 45" value="{{user.age}}">
         </div>
 
-        <div class="mb-1">
+        <div class="mb-2">
           <label for="exampleInputIdealTemp1" class="form-label">Ideal Air Temperature (F)</label>
           <input type="number" class="form-control" id="exampleInputIdealTemp1" aria-describedby="idealTempHelp"
           placeholder="e.g. 73" value="{{user.ideal_temp_f}}" name="idealtemp">
         </div>
 
-        <div class="mb-1">
+        <div class="mb-2">
           <label for="exampleInputEmail1" class="form-label">Email</label>
           <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
           required name="email" value="{{user.email}}">
         </div>
       
-        <div class="mb-1">
+        <div class="mb-2">
           <label for="exampleInputPassword1" class="form-label">Password</label>
           <input type="password" class="form-control" id="exampleInputPassword1"
           name="password">
         </div>
-      
+      <br>
         <div>
           <label>Opt in for heat alerts: </label> 
           {% if user.opted_in == None or user.opted_in == "No" %}
@@ -82,8 +82,8 @@
       </form>
 
     </div>
-    <div class= "col">
-      <img id="icecream-img" src="/static/icecream_sm.jpg">
+    <div class= "col-5 offset-1">
+      <img id="icecream-img" src="/static/icecream_sm_crop3.jpg">
     </div>
   </div>
 </div>

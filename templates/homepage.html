@@ -16,7 +16,7 @@
   </head>
 
   {% for msg in get_flashed_messages() %}
-  <div class="alert alert-warning alert-dismissible show" role="alert">
+  <div class="alert alert-primary alert-dismissible show" role="alert">
     <p class="flash-msg">
       {{ msg }}
     </p>
@@ -29,26 +29,29 @@
 
 <div class="container-fluid" id="homepage">
   <div class="row">
+
     <div class="col-10">
     <h2>Heat Resilience App</h2>
     </div>
+
     <div class="col-2">
-      <button type="button" id="my-thing" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+      <div id="loginbutton">
+      <button type="button" id="loginbutton" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
         Log in
         </button>
+      </div>
     </div>
   
   </div>
-
+<br>
   <div class="row">
-    <div class="col">
-      <!-- <h4>Welcome!</h4> -->
+    <p>
+      With this app, you can sign up for predictive heat text alerts and also keep track 
+      of how many alerts you've received over time. 
+      </p>
 
-        <p>As the planet warms, we can expect to experience more extreme and more frequent heat-related impacts. 
-        With this app, you can sign up for predictive heat alerts sent straight to your phone and also keep track 
-        of how many alerts you've received over time. Be well!
-        </p>
-
+    <div class="col" id="homepage-form">
+    
         <h4>Create an Account</h4>
           <form action="/users" method="POST">
             <div class="mb-1">
@@ -133,7 +136,7 @@
           </div> -->
           <button type="submit" class="btn btn-primary">Submit</button>
 
-          <a href="/reset-password">Forgot password?</a>
+          <a href="/reset-password" id="forgotpassword">Forgot password?</a>
 
         </form>
       </div>
@@ -154,6 +157,6 @@
  integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" 
  crossorigin="anonymous">
 </script>
-<script src="/static/script.js"></script>
+
 
 </html>
