@@ -7,37 +7,23 @@ import json
 import os
 from twilio.rest import Client
 from pprint import pprint
-import schedule
-import time
 
 # from flask import (app, Flask, render_template, request, flash, session,
 #                    redirect)
 # from flask_sqlalchemy import SQLAlchemy
 
-# os.system('source secrets.sh') #runs command line script in console 
+os.system('source secrets.sh') #runs command line script in console 
 
-# # Twilio info:
-# account_sid = os.environ['TWILIO_ACCOUNT_SID']
-# auth_token = os.environ['TWILIO_AUTH_TOKEN']   
-# client = Client(account_sid, auth_token)
+# Twilio info:
+account_sid = os.environ['TWILIO_ACCOUNT_SID']
+auth_token = os.environ['TWILIO_AUTH_TOKEN']   
+client = Client(account_sid, auth_token)
 
-# # OpenWeather info:
-# openweatherkey = os.environ['OPENWEATHER_KEY']
+# OpenWeather info:
+openweatherkey = os.environ['OPENWEATHER_KEY']
 
 def get_user():
     """Gets users, calls API, alerts users."""
-
-    os.system('source secrets.sh') #runs command line script in console 
-
-    # Twilio info:
-    account_sid = os.environ['TWILIO_ACCOUNT_SID']
-    auth_token = os.environ['TWILIO_AUTH_TOKEN']   
-    client = Client(account_sid, auth_token)
-
-    # OpenWeather info:
-    openweatherkey = os.environ['OPENWEATHER_KEY']
-
-
 
     # retrieve opted-in user location (city) data using SQLAlchemy 
     users = User.query.filter_by(opted_in="Yes").all() # returns a list
