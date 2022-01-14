@@ -126,8 +126,6 @@ def get_user():
         else:
             return
 
-#2.0 - if the calculated heat index is 20% hotter than the ideal temperature provided, send tailored alert
-
 # Helps execute code
 if __name__ == "__main__":
     # DebugToolbarExtension(app)
@@ -135,17 +133,5 @@ if __name__ == "__main__":
     connect_to_db(app, 'heat-resilience-app')
     # get_user()
     # app.run(host="0.0.0.0", debug=True) #--> don't need to run app
-
-# schedule the code for every day at 12am
-# Every day at 12am or 00:00 time get_user() is called
-# schedule.every().day.at("00:00").do(get_user)
-
-# # Loop so that the scheduling task
-# # keeps on running all time.
-# while True:  
-#     # Checks whether a scheduled task 
-#     # is pending to run or not
-#     schedule.run_pending()
-#     time.sleep(1)
 
 

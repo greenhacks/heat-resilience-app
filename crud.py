@@ -2,10 +2,10 @@
 
 from model import db, User, AlertType, IndividualAlerts
 from time import strftime
-import server
-import requests
-import datetime
-import twilio
+# import server
+# import requests
+# import datetime
+# import twilio
 
 
 def create_alert(alert_text, temp_range):
