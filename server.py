@@ -254,4 +254,4 @@ def show_about():
 if __name__ == "__main__":
     # DebugToolbarExtension(app)
     connect_to_db(app, 'heat-resilience-app')
-    # app.run(host="0.0.0.0", debug=True) #removed for prod
+    app.run(host="0.0.0.0") #debug=True was removed for prod
