@@ -20,8 +20,13 @@ Users will be able to:
 
 ## Images
 - Homepage: ![homepage](https://github.com/greenhacks/heat-resilience-app/blob/main/static/homepage.png)
+
 - Dashboard Chart: ![chart](https://github.com/greenhacks/heat-resilience-app/blob/main/static/dashboard-chart.png)
-- View Settings: ![view-settings](https://github.com/greenhacks/heat-resilience-app/blob/main/static/view-settings.pngs)
+
+- View Settings: ![view-settings](https://github.com/greenhacks/heat-resilience-app/blob/main/static/view-settings.png)
+
 - Update Settings: ![update-settings](https://github.com/greenhacks/heat-resilience-app/blob/main/static/update-settings.png)
+
 - Resilience Resources: ![resilience](https://github.com/greenhacks/heat-resilience-app/blob/main/static/resilience-resources.png)
+
 - Twilio Text Message: ![text-alerts](https://github.com/greenhacks/heat-resilience-app/blob/main/static/text-alert.png)
