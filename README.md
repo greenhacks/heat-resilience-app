@@ -24,4 +24,4 @@ Dashboard Chart: ![chart](https://github.com/greenhacks/heat-resilience-app/blob
 View Settings: ![view-settings](https://github.com/greenhacks/heat-resilience-app/blob/main/static/view-settings.pngs)
 Update Settings: ![update-settings](https://github.com/greenhacks/heat-resilience-app/blob/main/static/update-settings.png)
 Resilience Resources: ![resilience](https://github.com/greenhacks/heat-resilience-app/blob/main/static/resilience-resources.png)
-Twilio Text Message: ![text-alerts](https://github.com/greenhacks/heat-resilience-app/blob/main/static/text-alert.png
+Twilio Text Message: ![text-alerts](https://github.com/greenhacks/heat-resilience-app/blob/main/static/text-alert.png)
