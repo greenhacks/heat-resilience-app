@@ -1,7 +1,7 @@
 """Server for the app."""
 import os
 
-os.system("source secrets.sh") #runs command line script in console 
+os.system("source ./secrets.sh") #runs command line script in console 
 
 import crud
 import re
