@@ -8,6 +8,8 @@ import os
 from twilio.rest import Client
 from pprint import pprint
 
+os.system("source secrets.sh") #runs command line script in console 
+
 # Twilio info:
 account_sid = os.environ['TWILIO_ACCOUNT_SID']
 auth_token = os.environ['TWILIO_AUTH_TOKEN']   
