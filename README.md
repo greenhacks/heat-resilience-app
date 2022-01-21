@@ -18,6 +18,15 @@ Users will be able to:
 ## Tech Stack
 - Python,  Flask,  Javascript, HTML, CSS, Chart.js, Bootstrap, PostgreSQL, SQLAlchemy, AJAX, Jinja, Pytest
 
+## How to Start the App
+- Clone this repo into your local machine
+- Run `virtualenv env` to create a virtual environment on your machine
+- Run `source env/bin/activate` to activate the virtual environment
+- Run `pip3 install -r requirements.txt`
+- Run `source secrets.sh`
+- Run `python3 server.py`
+
+
 ## Images
 - Homepage: ![homepage](https://github.com/greenhacks/heat-resilience-app/blob/main/static/homepage.png)
 
