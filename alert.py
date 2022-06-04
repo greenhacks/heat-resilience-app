@@ -14,6 +14,7 @@ os.system("source secrets.sh") #runs command line script in console
 account_sid = os.environ['TWILIO_ACCOUNT_SID']
 auth_token = os.environ['TWILIO_AUTH_TOKEN']   
 client = Client(account_sid, auth_token)
+twilio_phone_number = os.environ['TWILIO_PHONE_NUMBER']
 
 # OpenWeather info:
 openweatherkey = os.environ['OPENWEATHER_KEY']
@@ -81,7 +82,7 @@ def get_user():
                 # send message       
                 message = client.messages.create(
                         body=AlertType.query.filter_by(temp_range="129.3+").first().alert_text,
-                        from_='+18509034729',
+                        from_=twilio_phone_number,
                         to=user.phone 
                     )
                 print(message.sid) #prints to terminal
@@ -89,10 +90,10 @@ def get_user():
 
                 individual_alert = crud.create_individual_alert(user.user_id, alert.alert_type_id, date_sent) # create individual alert record
         
-            elif results[user.city] >= 40:
+            elif results[user.city] >= 105.9:
                 message = client.messages.create(
                         body=AlertType.query.filter_by(temp_range="105.9-129.2").first().alert_text,
-                        from_='+18509034729',
+                        from_=twilio_phone_number,
                         to=user.phone 
                     )
                 print(message.sid)
@@ -100,10 +101,10 @@ def get_user():
                 
                 individual_alert = crud.create_individual_alert(user.user_id, alert.alert_type_id, date_sent) # create individual alert record
 
-            elif results[user.city] >= 40:
+            elif results[user.city] >= 89.7:
                 message = client.messages.create(
                         body=AlertType.query.filter_by(temp_range="89.7-105.8").first().alert_text,
-                        from_='+18509034729',
+                        from_=twilio_phone_number,
                         to=user.phone 
                     )
                 print(message.sid)
@@ -114,8 +115,8 @@ def get_user():
             elif results[user.city] >= 40:
                 message = client.messages.create(
                         body=AlertType.query.filter_by(temp_range="78.8-89.6").first().alert_text,
-                        from_='+18509034729',
-                        to=user.phone # need to replace with a user's number
+                        from_=twilio_phone_number,
+                        to=user.phone
                     )
                 print(message.sid)
                 alert = AlertType.query.filter_by(temp_range="89.7-105.8").first()
@@ -131,7 +132,7 @@ if __name__ == "__main__":
     # DebugToolbarExtension(app)
     from server import app
     connect_to_db(app, 'heat-resilience-app')
-    # get_user()
+    get_user()
     # app.run(host="0.0.0.0", debug=True) #--> don't need to run app
 
 
