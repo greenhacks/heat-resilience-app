@@ -34,7 +34,6 @@ def show_dashboard():
     
     user = crud.get_user_by_email(session['user_email'])
     fname = user.fname
-
     alerts = crud.get_total_alerts(user.email)
     return render_template('dashboard.html', alerts=alerts, fname=fname)
 
@@ -43,9 +42,7 @@ def get_total_alerts():
     """Get total alerts (count) for each user."""
 
     user = crud.get_user_by_email(session['user_email'])
-
     total_alerts = crud.get_total_alerts(user.email)
-
     return total_alerts
 
 @app.route('/monthly-alerts.json')
@@ -53,13 +50,9 @@ def get_monthly_alerts():
     """Get alerts by month for current year."""
 
     user = crud.get_user_by_email(session['user_email'])
-
     date = datetime.date.today()
-
     year = date.year
-    
     monthly_alerts = crud.get_monthly_alerts(user.email) #returns list
-
     alerts_this_month = []
     for date, total in monthly_alerts:
         alerts_this_month.append({'month': date,
@@ -129,7 +122,6 @@ def get_settings():
 
     # get user and info from the database using sessions
     user = crud.get_user_by_email(session['user_email'])
-
     fname = user.fname
     lname = user.lname
     email = user.email
@@ -170,7 +162,6 @@ def update_user_settings():
         city = city.title()
         email = email.lower()
 
-
         new_settings_dict = {
             'fname': fname,
             'lname': lname,
@@ -186,10 +177,7 @@ def update_user_settings():
 
         # use the user's email to update settings via crud file
         updated_user = crud.update_settings(user, new_settings_dict)
-    
-        
         flash('Your settings have been updated!')
-
         return render_template('update_settings.html', user=updated_user)
     
     else:
@@ -199,21 +187,15 @@ def update_user_settings():
 def reset_password():
     """Resets a password."""
     
-
     if request.method == 'POST':
         email = request.form.get('resetemail')
         password = request.form.get('resetpassword')
-
         user = crud.get_user_by_email(email)
-
         new_password_dict = {
             'password': password
         }
-
         updated_user = crud.update_settings(user, new_password_dict)
-
         flash('Your password has been updated!')
-        
         return redirect("/")
     
     else:
@@ -224,7 +206,6 @@ def click_alert():
     """Gets text alert on click - for demo only."""
 
     alert.get_user()
-
     return redirect('/dashboard')
 
 @app.route('/logout')
@@ -232,9 +213,7 @@ def logout():
     """Log a user out"""
 
     del session['user_email']
-    
     flash("You have logged out.")
-    
     return redirect("/")
 
 @app.route('/resilience-resources')
