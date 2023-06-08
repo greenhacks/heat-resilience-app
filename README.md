@@ -11,6 +11,9 @@ Users will be able to:
 - Keep track of how many alerts they have received over time on a Dashboard
 - Visit About & Resilience Resources pages
 
+## 2.0
+- Refactor with FastAPI for handling async/await, promises
+
 ## APIs Required
 - OpenWeather API - https://openweathermap.org/api
 - Twilio Messaging API - https://www.twilio.com/docs/usage/api#send-an-sms-with-twilios-api
@@ -39,3 +42,6 @@ Users will be able to:
 - Resilience Resources: ![resilience](https://github.com/greenhacks/heat-resilience-app/blob/main/static/resilience-resources.png)
 
 - Twilio Text Message: ![text-alerts](https://github.com/greenhacks/heat-resilience-app/blob/main/static/text-alert.png)
+
+## System Architecture
+- The database has normalized data.
