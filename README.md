@@ -13,6 +13,7 @@ Users will be able to:
 
 ## 2.0
 - Refactor with FastAPI for handling async/await, promises
+- Incorporate authentication (LDAP? AD?)
 
 ## APIs Required
 - OpenWeather API - https://openweathermap.org/api
