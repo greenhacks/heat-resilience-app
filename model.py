@@ -2,10 +2,8 @@
 
 from flask_sqlalchemy import SQLAlchemy
 
-#instantiates SQLAlchemy object
 db = SQLAlchemy()
 
-# Assuming your Flask app is in server.py
 def connect_to_db(app, db_name):
     """Connect to database."""
 
@@ -53,7 +51,7 @@ class AlertType(db.Model):
     alert_text = db.Column(db.String(200))
     temp_range = db.Column(db.String(12))
 
-    indiv_alerts = db.relationship("IndividualAlerts", back_populates="alert_type") #refers to line 
+    indiv_alerts = db.relationship("IndividualAlerts", back_populates="alert_type")
 
 
     def __repr__(self):

@@ -2,10 +2,6 @@
 
 from model import db, User, AlertType, IndividualAlerts
 from time import strftime
-# import server
-# import requests
-# import datetime
-# import twilio
 
 
 def create_alert(alert_text, temp_range):
@@ -23,7 +19,7 @@ def create_individual_alert(user_id, alert_type_id, date_sent):
     individual_alert = IndividualAlerts(user_id=user_id, alert_type_id=alert_type_id, date_sent=date_sent)
 
     db.session.add(individual_alert)
-    db.session.commit() #persists data
+    db.session.commit() 
 
     return individual_alert
 
@@ -49,8 +45,8 @@ def get_user_by_email(email):
     """Get a user by email."""
 
     try:
-        user = User.query.filter(User.email == email).one() #needs to be .one because we want a unique user
-        return user # user will be either the user or None
+        user = User.query.filter(User.email == email).one() 
+        return user
 
     except Exception as e:
         print(e)
@@ -61,16 +57,14 @@ def get_user_by_email(email):
 def update_settings(user, new_settings_dict):
     """Update a user's settings per user input."""
 
-    # for every key and value in the dictionary
     for key, value in new_settings_dict.items():
         if value == "None" or value == "" or value == None:
             pass
-        else: # if the value is not an empty string or None
-            setattr(user, key, value) #as long as the key in the dict matches the attribute
-                # in the model, the attribute will be updated to the value
+        else: 
+            setattr(user, key, value) 
 
         db.session.add(user)
-        db.session.commit() # persist data
+        db.session.commit()
 
     return user
 
@@ -91,7 +85,7 @@ def get_total_alerts(email):
     """Gets total number of alerts a user has received"""
     user = get_user_by_email(email)
 
-    total_alerts = IndividualAlerts.query.filter_by(user_id=user.user_id).count() #SQLAlchemy 
+    total_alerts = IndividualAlerts.query.filter_by(user_id=user.user_id).count() 
 
     if total_alerts == None:
         return 0
@@ -108,18 +102,11 @@ def get_monthly_alerts(email):
 
     months_num = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
-    monthly_alerts = IndividualAlerts.query.filter_by(user=user).all() #returns a list
+    monthly_alerts = IndividualAlerts.query.filter_by(user=user).all() 
 
-    for alert in monthly_alerts:    # [<Alert>, <Alert>]
-        # get the year the alert was sent
+    for alert in monthly_alerts:    
         interim = alert.date_sent
-        # year = interim.strftime("%Y")
-        
-        # get the months for each alert
         month = int(interim.strftime("%m"))
-
-        # new_dict['year'] = year
-
         new_dict[month] = new_dict.get(month, 0) + 1
 
     for month in months_num:
@@ -130,7 +117,6 @@ def get_monthly_alerts(email):
     return list(new_dict.items())
 
 
-# Helps execute code
 if __name__ == "__main__":
     from model import connect_to_db
     from server import app

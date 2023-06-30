@@ -1,7 +1,7 @@
 """Server for the app."""
 import os
 
-os.system("source ./secrets.sh") #runs command line script in console 
+os.system("source ./secrets.sh")
 
 import crud
 import re
@@ -52,7 +52,7 @@ def get_monthly_alerts():
     user = crud.get_user_by_email(session['user_email'])
     date = datetime.date.today()
     year = date.year
-    monthly_alerts = crud.get_monthly_alerts(user.email) #returns list
+    monthly_alerts = crud.get_monthly_alerts(user.email)
     alerts_this_month = []
     for date, total in monthly_alerts:
         alerts_this_month.append({'month': date,
@@ -80,7 +80,6 @@ def create_account():
         flash('Please input a valid phone number.')
         return False
 
-    # get the user
     user = crud.get_user_by_email(email)
 
     if user is None:
@@ -92,7 +91,6 @@ def create_account():
     
     return redirect("/") 
     
-# route that handles login
 @app.route('/login', methods=['POST'])
 def handle_login():
     """Log user into application."""
@@ -100,7 +98,6 @@ def handle_login():
     email = request.form.get('loginemail') 
     password = request.form.get('loginpassword')
 
-    # get user by email
     user = crud.get_user_by_email(email)
 
     if user is None:
@@ -120,7 +117,6 @@ def handle_login():
 def get_settings():
     """Get and show a user's settings."""
 
-    # get user and info from the database using sessions
     user = crud.get_user_by_email(session['user_email'])
     fname = user.fname
     lname = user.lname
@@ -229,7 +225,6 @@ def show_about():
 
     return render_template('about.html')
 
-# Helps execute code
 if __name__ == "__main__":
     # DebugToolbarExtension(app)
     connect_to_db(app, 'heat-resilience-app')

@@ -8,33 +8,29 @@ import os
 from twilio.rest import Client
 from pprint import pprint
 
-os.system("source secrets.sh") #runs command line script in console 
+os.system("source secrets.sh")
 
-# Twilio info:
+
 account_sid = os.environ['TWILIO_ACCOUNT_SID']
 auth_token = os.environ['TWILIO_AUTH_TOKEN']   
 client = Client(account_sid, auth_token)
 twilio_phone_number = os.environ['TWILIO_PHONE_NUMBER']
-
-# OpenWeather info:
 openweatherkey = os.environ['OPENWEATHER_KEY']
 
 def get_user():
     """Gets users, calls API, alerts users."""
 
     # retrieve opted-in user location (city) data using SQLAlchemy 
-    users = User.query.filter_by(opted_in="Yes").all() # returns a list
+    users = User.query.filter_by(opted_in="Yes").all() 
 
-    # make a set of all the users' unique cities 
+    # a set of all the users' unique cities 
     cities = set()
 
     for user in users:
-        cities.add(user.city) # attribute
+        cities.add(user.city)
 
-    results = dict() # needs to be outside of the city for-loop, or else it will get reset
+    results = dict() 
 
-    # after getting user city data, loop over it and make API call to OpenWeather with the city data retrieved above
-    # to get temp and relative humidity for one day (8 timestamps) (https://www.weather.gov/media/unr/heatindex.pdf)
     for city in cities: 
         payload = {'q': city,
                 'appid': openweatherkey,
@@ -44,32 +40,23 @@ def get_user():
         response = requests.get('http://api.openweathermap.org/data/2.5/forecast?',
                         params=payload)
 
-        weather = response.json() #--> turn JSON response into Python dict
+        weather = response.json()
 
         pprint(weather)
 
         # extract data returned from API call
-        weather_results = weather['list'] # a list of dictionaries
-
-        # print(weather_results)
+        weather_results = weather['list']
         
         heat_indexes = []
 
         # loop over the 40 weather results to get timestamp, temp, and humidity (for each city)
         for i in range(len(weather_results)): 
-
-            # timestamp = weather_results[i].get('dt_txt') #value
             temp = weather_results[i]['main'].get('temp')
             humidity = weather_results[i]['main'].get('humidity')
-
-            # run calculate_heat_index for each timestamp
-            heat_index = crud.calculate_heat_index(temp, humidity)
-            
-            # update heat indexes list - get 8 heat indexes per city
-            # heat_indexes.append((heat_index, timestamp)) #--> with timestamp
+            heat_index = crud.calculate_heat_index(temp, humidity) # run calculate_heat_index for each timestamp
             heat_indexes.append(heat_index)
 
-        results[city] = max(heat_indexes) #heat_indexes is a list that will be the value (original)
+        results[city] = max(heat_indexes)
     
     # Twilio API calls: loop over users -  if they are in city, send message
     i = 0
@@ -78,19 +65,18 @@ def get_user():
                 
     for user in users:
         if user.city in results:
-            if results[user.city] >= 129: 
-                # send message       
+            if results[user.city] >= 40: 
                 message = client.messages.create(
                         body=AlertType.query.filter_by(temp_range="129.3+").first().alert_text,
                         from_=twilio_phone_number,
                         to=user.phone 
                     )
-                print(message.sid) #prints to terminal
+                print(message.sid)
                 alert = AlertType.query.filter_by(temp_range="129.3+").first()
 
                 individual_alert = crud.create_individual_alert(user.user_id, alert.alert_type_id, date_sent) # create individual alert record
         
-            elif results[user.city] >= 105.9:
+            elif results[user.city] >= 30:
                 message = client.messages.create(
                         body=AlertType.query.filter_by(temp_range="105.9-129.2").first().alert_text,
                         from_=twilio_phone_number,
@@ -101,7 +87,7 @@ def get_user():
                 
                 individual_alert = crud.create_individual_alert(user.user_id, alert.alert_type_id, date_sent) # create individual alert record
 
-            elif results[user.city] >= 89.7:
+            elif results[user.city] >= 20:
                 message = client.messages.create(
                         body=AlertType.query.filter_by(temp_range="89.7-105.8").first().alert_text,
                         from_=twilio_phone_number,
@@ -112,7 +98,7 @@ def get_user():
                 
                 individual_alert = crud.create_individual_alert(user.user_id, alert.alert_type_id, date_sent) # create individual alert record
 
-            elif results[user.city] >= 40:
+            elif results[user.city] >= 10:
                 message = client.messages.create(
                         body=AlertType.query.filter_by(temp_range="78.8-89.6").first().alert_text,
                         from_=twilio_phone_number,
@@ -127,12 +113,9 @@ def get_user():
         else:
             return
 
-# Helps execute code
 if __name__ == "__main__":
     # DebugToolbarExtension(app)
     from server import app
     connect_to_db(app, 'heat-resilience-app')
     get_user()
-    # app.run(host="0.0.0.0", debug=True) #--> don't need to run app
-
 
